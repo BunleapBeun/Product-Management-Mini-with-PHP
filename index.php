@@ -39,33 +39,24 @@
                 </form>
             </div>
             <div class="col-9">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">Products</h5>
-                        <input type="text" id="searchInput" class="form-control" placeholder="Search Products..." />
-                        <button class="btn btn-primary mt-2" id="searchBtn">Search</button>
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Image</th>
-                                    <th>Name</th>
-                                    <th>Brand</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Stock Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbl-products">
-                                <!-- Product rows will be populated here -->
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="card p-4">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Brand</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Stock Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl-products"></tbody>
+                    </table>
+                    <p class="m-0 fs-5 fw-medium">Total Price: $<span id="total_price"></span></p>
                 </div>
-
             </div>
         </div>
         <div class="modal fade" id="fileErrorModal" tabindex="-1" aria-labelledby="fileErrorModalLabel" aria-hidden="true">
