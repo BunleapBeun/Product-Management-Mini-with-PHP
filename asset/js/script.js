@@ -9,13 +9,30 @@
     const totalPrice = document.getElementById("total_price");
     const searchInput = document.getElementById("search-input");
     const searchButton = document.getElementById("search-btn");
+    const productToast = new bootstrap.Toast(document.getElementById('productToast'));
     let productID = 0;
+
+    // Function to show toast notification (all with 'Notification' as the title)
+    const showToast = (message) => {
+        const toastTitle = document.getElementById('toast-title');
+        const toastBody = document.getElementById('toast-body');
+        const toastTime = document.getElementById('toast-time');
+
+        // Set the title as 'Notification' for all toasts
+        toastTitle.textContent = 'Notification';
+        toastBody.textContent = message;
+        toastTime.textContent = new Date().toLocaleTimeString('en-US');
+
+        productToast.show();
+    };
 
     const loadData = (searchQuery = "") => {
         const url = searchQuery ? `api/product/search.php?search=${searchQuery}` : "api/product/index.php";
         axios.get(url).then((res) => {
             console.log("Res = ", res);
             tblProducts.innerHTML = "";
+            let total = 0;  // Initialize total price
+
             res.data.products.forEach((product) => {
                 let stockStatus = "";
 
@@ -29,7 +46,10 @@
 
                 const productImage = product.photo ? `storage/img/${product.photo}` : "asset/img/default_img.jpg";
 
-                tblProducts.innerHTML += `
+                // Calculate total price for this product
+                total += product.price * product.quantity;
+
+                tblProducts.innerHTML += `  
                     <tr class="align-middle">
                         <td>${product.id}</td>
                         <td>
@@ -50,17 +70,21 @@
                 `;
             });
 
-            totalPrice.innerHTML = res.data.total_price.toLocaleString();
+            // Update the total price in the UI
+            totalPrice.innerHTML = total.toLocaleString();
 
+            // Handle delete button click
             document.querySelectorAll(".btn-delete").forEach((btn) => {
                 btn.onclick = (e) => {
                     const selectedID = btn.getAttribute("data-id");
                     axios.get(`api/product/destroy.php?id=${selectedID}`).then(() => {
-                        loadData(searchQuery);
+                        loadData(searchQuery);  // Reload data after deletion
+                        showToast('Product deleted successfully!');
                     });
                 };
             });
 
+            // Handle edit button click
             document.querySelectorAll(".btn-edit").forEach((btn) => {
                 btn.onclick = (e) => {
                     const productJSON = btn.getAttribute("data-product");
@@ -70,6 +94,7 @@
                     productBrand.value = productOBJ.brand;
                     productPrice.value = productOBJ.price;
                     productQuantity.value = productOBJ.quantity;
+                    showToast('Product loaded for editing');
                 };
             });
         });
@@ -110,6 +135,7 @@
                 }
                 productName.value = productBrand.value = productPrice.value = productQuantity.value = productPhoto.value = "";
                 loadData();
+                showToast('Product saved successfully!');
             });
         } else {
             axios.post("api/product/update.php", frmData).then((res) => {
@@ -120,6 +146,7 @@
                 productID = 0;
                 productName.value = productBrand.value = productPrice.value = productQuantity.value = productPhoto.value = "";
                 loadData();
+                showToast('Product updated successfully!');
             });
         }
     };

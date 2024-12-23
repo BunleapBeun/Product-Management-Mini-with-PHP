@@ -69,6 +69,7 @@
                 </div>
             </div>
         </div>
+        <!-- ! modal -->
         <div class="modal fade" id="fileErrorModal" tabindex="-1" aria-labelledby="fileErrorModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -80,11 +81,26 @@
                         The uploaded file type is not supported. Please upload a JPEG, PNG, or WebP image.
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Toasts Container -->
+        <div aria-live="polite" aria-atomic="true" class="position-absolute top-0 end-0 p-3">
+            <div id="productToast" class="toast" style="min-width: 250px;" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto" id="toast-title"></strong>
+                    <small id="toast-time" class="text-muted"></small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div id="toast-body" class="toast-body">
+                    Product action completed successfully!
+                </div>
+            </div>
+        </div>
+
+
     </div>
     <script src="./asset/js/bootstrap.bundle.min.js"></script>
     <script src="./asset/js/axios.min.js"></script>
