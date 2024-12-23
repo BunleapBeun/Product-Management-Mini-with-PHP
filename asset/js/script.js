@@ -7,10 +7,13 @@
     const productPhoto = document.getElementById("photo");
     const tblProducts = document.getElementById("tbl-products");
     const totalPrice = document.getElementById("total_price");
+    const searchInput = document.getElementById("search-input");
+    const searchButton = document.getElementById("search-btn");
     let productID = 0;
 
-    const loadData = () => {
-        axios.get("api/product/index.php").then((res) => {
+    const loadData = (searchQuery = "") => {
+        const url = searchQuery ? `api/product/search.php?search=${searchQuery}` : "api/product/index.php";
+        axios.get(url).then((res) => {
             console.log("Res = ", res);
             tblProducts.innerHTML = "";
             res.data.products.forEach((product) => {
@@ -24,14 +27,13 @@
                     stockStatus = "In Stock";
                 }
 
-                // Check if product has a photo, if not set to default
                 const productImage = product.photo ? `storage/img/${product.photo}` : "asset/img/default_img.jpg";
 
                 tblProducts.innerHTML += `
                     <tr class="align-middle">
                         <td>${product.id}</td>
                         <td>
-                            <img src="${product.photo ? `storage/img/${product.photo}` : "asset/img/default_img.jpg"}" alt="product.jpg" style="height: 100px; width: 100%; object-fit: cover;">
+                            <img src="${productImage}" alt="product.jpg" style="height: 130px; width: 100%; object-fit: cover;">
                         </td>
                         <td>${product.name}</td>
                         <td>${product.brand}</td>
@@ -53,11 +55,9 @@
             document.querySelectorAll(".btn-delete").forEach((btn) => {
                 btn.onclick = (e) => {
                     const selectedID = btn.getAttribute("data-id");
-                    axios
-                        .get(`api/product/destroy.php?id=${selectedID}`)
-                        .then((resDel) => {
-                            loadData();
-                        });
+                    axios.get(`api/product/destroy.php?id=${selectedID}`).then(() => {
+                        loadData(searchQuery);
+                    });
                 };
             });
 
@@ -91,7 +91,6 @@
         // Check if photo is uploaded and its type is allowed
         if (photo) {
             if (!allowedTypes.includes(photo.type)) {
-                // Show the modal if the file type is not allowed
                 const fileErrorModal = new bootstrap.Modal(document.getElementById('fileErrorModal'));
                 fileErrorModal.show();
                 return;  // Stop form submission
@@ -109,12 +108,7 @@
                     alert(res.data.message);
                     return;
                 }
-                productName.value =
-                    productBrand.value =
-                    productPrice.value =
-                    productQuantity.value =
-                    productPhoto.value =
-                    "";
+                productName.value = productBrand.value = productPrice.value = productQuantity.value = productPhoto.value = "";
                 loadData();
             });
         } else {
@@ -124,14 +118,16 @@
                     return;
                 }
                 productID = 0;
-                productName.value =
-                    productBrand.value =
-                    productPrice.value =
-                    productQuantity.value =
-                    productPhoto.value =
-                    "";
+                productName.value = productBrand.value = productPrice.value = productQuantity.value = productPhoto.value = "";
                 loadData();
             });
         }
     };
+
+    // Search button click event
+    searchButton.addEventListener("click", () => {
+        const searchQuery = searchInput.value.trim();
+        loadData(searchQuery);  // Reload data with the search query
+    });
+
 })();

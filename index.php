@@ -10,36 +10,46 @@
 </head>
 
 <body>
-    <div class="container pt-5">
-        <h1 class="text-center pb-3">Product Management</h1>
-        <div class="row g-5">
-            <div class="col-3 card p-4">
-                <form id="frmProduct" method="POST" enctype="multipart/form-data">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Product Name</label>
-                        <input type="text" id="name" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="brand" class="form-label">Brand</label>
-                        <input type="text" id="brand" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="price" class="form-label">Price</label>
-                        <input type="number" id="price" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="quantity" class="form-label">Quantity</label>
-                        <input type="number" id="quantity" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="photo" class="form-label">Product Image</label>
-                        <input type="file" id="photo" class="form-control">
-                    </div>
-                    <button class="btn btn-primary w-100" type="submit">Save Product</button>
-                </form>
+    <div class="container py-5">
+        <h1 class="text-center pb-4">Product Inventory Management</h1>
+        <div class="row g-4">
+            <div class="col-3">
+                <div class="card p-4">
+                    <form id="frmProduct" method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="name" class="form-labe fw-medium">Product Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="brand" class="form-label fw-medium">Brand</label>
+                            <input type="text" id="brand" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="form-label fw-medium">Price</label>
+                            <input type="number" id="price" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="quantity" class="form-label fw-medium">Quantity</label>
+                            <input type="number" id="quantity" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="photo" class="form-label fw-medium">Product Image</label>
+                            <input type="file" id="photo" class="form-control">
+                        </div>
+                        <button class="btn btn-primary w-100 fw-medium" type="submit">Save Product</button>
+                    </form>
+                </div>
             </div>
             <div class="col-9">
                 <div class="card p-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="fw-bold m-0">Product List</h3>
+                        <div class="search-bar py-3 d-flex">
+                            <input type="search" id="search-input" class="form-control" placeholder="Search products..." />
+                            <button id="search-btn" class="btn btn-secondary ms-3">Search</button>
+                        </div>
+
+                    </div>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
