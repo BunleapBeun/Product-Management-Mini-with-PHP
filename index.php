@@ -11,29 +11,29 @@
 
 <body>
     <div class="container py-5">
-        <h1 class="text-center pb-4">Product Inventory Management</h1>
+        <h1 class="text-center pb-4 m-0">Product Inventory Management</h1>
         <div class="row g-4">
             <div class="col-3">
                 <div class="card p-4">
                     <form id="frmProduct" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
-                            <label for="name" class="form-labe fw-medium">Product Name</label>
+                            <label for="name" class="form-labe fw-medium pb-1">Product Name</label>
                             <input type="text" id="name" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <label for="brand" class="form-label fw-medium">Brand</label>
+                            <label for="brand" class="form-label fw-medium pb-1 m-0">Brand</label>
                             <input type="text" id="brand" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <label for="price" class="form-label fw-medium">Price</label>
+                            <label for="price" class="form-label fw-medium pb-1 m-0">Price</label>
                             <input type="number" id="price" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <label for="quantity" class="form-label fw-medium">Quantity</label>
+                            <label for="quantity" class="form-label fw-medium pb-1 m-0">Quantity</label>
                             <input type="number" id="quantity" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <label for="photo" class="form-label fw-medium">Product Image</label>
+                            <label for="photo" class="form-label fw-medium pb-1 m-0">Product Image</label>
                             <input type="file" id="photo" class="form-control">
                         </div>
                         <button class="btn btn-primary w-100 fw-medium" type="submit">Save Product</button>
